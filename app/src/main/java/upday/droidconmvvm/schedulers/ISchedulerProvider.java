@@ -1,6 +1,6 @@
 package upday.droidconmvvm.schedulers;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import io.reactivex.Scheduler;
 

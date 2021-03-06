@@ -1,19 +1,14 @@
 package upday.droidconmvvm.model;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Language class containing the name of the language and the code.
  */
 public class Language {
 
-    public enum LanguageCode {
-        EN, DE, HR
-    }
-
     @NonNull
     private final String mName;
-
     @NonNull
     private final LanguageCode mCode;
 
@@ -30,5 +25,9 @@ public class Language {
     @NonNull
     public LanguageCode getCode() {
         return mCode;
+    }
+
+    public enum LanguageCode {
+        EN, DE, HR
     }
 }

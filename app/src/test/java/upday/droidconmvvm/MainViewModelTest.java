@@ -59,7 +59,7 @@ public class MainViewModelTest {
         String enGreeting = "Hello";
         Language en = new Language("English", LanguageCode.EN);
         Mockito.when(mDataModel.getGreetingByLanguageCode(LanguageCode.EN))
-               .thenReturn(Observable.just(enGreeting));
+                .thenReturn(Observable.just(enGreeting));
         TestSubscriber<String> testSubscriber = new TestSubscriber<>();
         mMainViewModel.getGreeting().subscribe(testSubscriber);
 

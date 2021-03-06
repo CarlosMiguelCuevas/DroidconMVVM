@@ -1,19 +1,20 @@
 package upday.droidconmvvm;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 import upday.droidconmvvm.model.Language;
 
 public class MainActivity extends AppCompatActivity {
@@ -77,14 +78,14 @@ public class MainActivity extends AppCompatActivity {
         mCompositeDisposable = new CompositeDisposable();
 
         mCompositeDisposable.add(mViewModel.getGreeting()
-                                    .subscribeOn(Schedulers.computation())
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe(this::setGreeting));
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::setGreeting));
 
         mCompositeDisposable.add(mViewModel.getSupportedLanguages()
-                                    .subscribeOn(Schedulers.computation())
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe(this::setLanguages));
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::setLanguages));
     }
 
     private void unBind() {
@@ -101,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
         assert mLanguagesSpinner != null;
 
         mLanguageSpinnerAdapter = new LanguageSpinnerAdapter(this,
-                                                             R.layout.language_item,
-                                                             languages);
+                R.layout.language_item,
+                languages);
         mLanguagesSpinner.setAdapter(mLanguageSpinnerAdapter);
     }
 
