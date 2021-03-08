@@ -20,6 +20,7 @@ public class MainViewModel {
 
     @NonNull
     private final BehaviorSubject<Language> mSelectedLanguage = BehaviorSubject.create();
+    private Language mSelectedLanguageInSpinner;
 
     @NonNull
     private final ISchedulerProvider mSchedulerProvider;
@@ -33,6 +34,7 @@ public class MainViewModel {
     @NonNull
     public Observable<String> getGreeting() {
         return mSelectedLanguage
+                .map(selected -> mSelectedLanguageInSpinner = selected)
                 .observeOn(mSchedulerProvider.computation())
                 .map(Language::getCode)
                 .flatMap(mDataModel::getGreetingByLanguageCode);
@@ -45,6 +47,10 @@ public class MainViewModel {
 
     public void languageSelected(@NonNull final Language language) {
         mSelectedLanguage.onNext(language);
+    }
+
+    public Language getSelectedLanguage(){
+        return mSelectedLanguageInSpinner;
     }
 
 }

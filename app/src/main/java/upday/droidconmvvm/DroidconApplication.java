@@ -14,6 +14,8 @@ public class DroidconApplication extends Application {
     @NonNull
     private final IDataModel mDataModel;
 
+    private MainViewModel mViewModel;
+
     public DroidconApplication() {
         mDataModel = new DataModel();
     }
@@ -30,7 +32,11 @@ public class DroidconApplication extends Application {
 
     @NonNull
     public MainViewModel getViewModel() {
-        return new MainViewModel(getDataModel(), getSchedulerProvider());
+        if(mViewModel == null)
+            mViewModel = new MainViewModel(getDataModel(), getSchedulerProvider());
+
+        return mViewModel;
+
     }
 
 }

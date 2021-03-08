@@ -105,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
                 R.layout.language_item,
                 languages);
         mLanguagesSpinner.setAdapter(mLanguageSpinnerAdapter);
+
+        mLanguagesSpinner.setSelection(mLanguageSpinnerAdapter.getPosition(mViewModel.getSelectedLanguage()));
     }
 
     @NonNull
