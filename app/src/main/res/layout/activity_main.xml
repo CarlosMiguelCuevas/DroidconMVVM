@@ -12,10 +12,12 @@
     <Spinner
         android:id="@+id/languages"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/language_item"/>
 
     <TextView
         android:id="@+id/greeting"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:text="Klingon"/>
 </LinearLayout>

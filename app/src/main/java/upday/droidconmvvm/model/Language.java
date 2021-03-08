@@ -28,6 +28,6 @@ public class Language {
     }
 
     public enum LanguageCode {
-        EN, DE, HR
+        EN, DE, HR, ESP
     }
 }

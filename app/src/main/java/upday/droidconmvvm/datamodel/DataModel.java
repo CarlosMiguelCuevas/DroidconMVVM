@@ -23,6 +23,7 @@ public class DataModel implements IDataModel {
         return Arrays
                 .asList(new Language("English", LanguageCode.EN),
                         new Language("German", LanguageCode.DE),
+                        new Language("Spanish", LanguageCode.ESP),
                         new Language("Slovakian", LanguageCode.HR));
     }
 
@@ -36,6 +37,8 @@ public class DataModel implements IDataModel {
                 return Observable.just("Hello!");
             case HR:
                 return Observable.just("Zdravo!");
+            case ESP:
+                return Observable.just("Queobo prro!");
             default:
                 return Observable.empty();
         }
