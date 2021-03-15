@@ -10,14 +10,14 @@
     tools:context="upday.droidconmvvm.MainActivity">
 
     <Spinner
-        android:id="@+id/languages"
+        android:id="@+id/languagesSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/language_item"/>
+        tools:listitem="@layout/language_item" />
 
     <TextView
-        android:id="@+id/greeting"
+        android:id="@+id/greetingTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Klingon"/>
+        tools:text="Klingon" />
 </LinearLayout>

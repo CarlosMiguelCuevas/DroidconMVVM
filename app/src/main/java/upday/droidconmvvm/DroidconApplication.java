@@ -14,8 +14,6 @@ public class DroidconApplication extends Application {
     @NonNull
     private final IDataModel mDataModel;
 
-    private MainViewModel mViewModel;
-
     public DroidconApplication() {
         mDataModel = new DataModel();
     }
@@ -28,15 +26,6 @@ public class DroidconApplication extends Application {
     @NonNull
     public ISchedulerProvider getSchedulerProvider() {
         return SchedulerProvider.getInstance();
-    }
-
-    @NonNull
-    public MainViewModel getViewModel() {
-        if(mViewModel == null)
-            mViewModel = new MainViewModel(getDataModel(), getSchedulerProvider());
-
-        return mViewModel;
-
     }
 
 }
