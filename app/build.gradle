@@ -37,11 +37,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.13.2'
-    //RxAndroid
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    // Because RxAndroid releases are few and far between, it is recommended you also
-    // explicitly depend on RxJava's latest version for bug fixes and new features.
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
     // Mockito
     implementation 'org.mockito:mockito-core:2.19.0'
     // Material styles
@@ -50,7 +45,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
     //liveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0"
-    //ViewBinding
+    //activityx
     implementation "androidx.activity:activity-ktx:1.2.1"
 
 }

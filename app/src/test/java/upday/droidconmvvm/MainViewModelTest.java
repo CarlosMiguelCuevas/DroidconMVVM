@@ -63,7 +63,7 @@ public class MainViewModelTest {
         TestSubscriber<String> testSubscriber = new TestSubscriber<>();
         mMainViewModel.getGreeting().subscribe(testSubscriber);
 
-        mMainViewModel.languageSelected(en);
+        mMainViewModel.setLanguageSelected(en);
 
         testSubscriber.assertNoErrors();
         testSubscriber.assertValue(enGreeting);

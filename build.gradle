@@ -23,6 +23,6 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
+task porno(type: Delete) {
     delete rootProject.buildDir
 }

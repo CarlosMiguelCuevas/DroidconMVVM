@@ -1,29 +1,25 @@
 package upday.droidconmvvm
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import androidx.lifecycle.Observer
 import upday.droidconmvvm.databinding.ActivityMainBinding
 import upday.droidconmvvm.model.Language
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var mCompositeDisposable: CompositeDisposable
 
     private val mViewModel: MainViewModel by viewModels {
         MainViewModelFactory(
-            (application as DroidconApplication).dataModel,
-            (application as DroidconApplication).schedulerProvider
+            (application as DroidconApplication).dataModel
         )
     }
 
-    //    private lateinit var mViewModel: MainViewModel
-    private var mLanguageSpinnerAdapter: LanguageSpinnerAdapter? = null
+    private lateinit var mLanguageSpinnerAdapter: LanguageSpinnerAdapter
 
     private lateinit var _activityView: ActivityMainBinding
 
@@ -31,13 +27,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _activityView = ActivityMainBinding.inflate(layoutInflater)
         setContentView(_activityView.root)
-        setupViews()
+        setupObservers()
     }
 
-    private fun setupViews() {
+    private fun setupObservers() {
+
+        setLanguages(mViewModel.supportedLanguages)
+
+        val selectedLanguageObserver = Observer<String> { greeting ->
+            setGreeting(greeting)
+        }
+        mViewModel.currentGreeting.observe(this, selectedLanguageObserver)
+
         _activityView.languagesSpinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>?, view: View,
+                parent: AdapterView<*>?, view: View?,
                 position: Int, id: Long
             ) {
                 itemSelected(position)
@@ -45,34 +49,9 @@ class MainActivity : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 //nothing to do here
+                Log.d(this.javaClass.name, "cayo aqui")
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        bind()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        unBind()
-    }
-
-    private fun bind() {
-        mCompositeDisposable = CompositeDisposable()
-        mCompositeDisposable.add(mViewModel.greeting
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { greeting: String -> setGreeting(greeting) })
-        mCompositeDisposable.add(mViewModel.supportedLanguages
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { languages: List<Language> -> setLanguages(languages) })
-    }
-
-    private fun unBind() {
-        mCompositeDisposable.clear()
     }
 
     private fun setGreeting(greeting: String) {
@@ -86,12 +65,10 @@ class MainActivity : AppCompatActivity() {
             languages
         )
         _activityView.languagesSpinner.adapter = mLanguageSpinnerAdapter
-        _activityView.languagesSpinner.setSelection(mLanguageSpinnerAdapter!!.getPosition(mViewModel.selectedLanguage))
     }
 
     private fun itemSelected(position: Int) {
-        assert(mLanguageSpinnerAdapter != null)
-        val languageSelected = mLanguageSpinnerAdapter!!.getItem(position)
-        mViewModel.languageSelected(languageSelected!!)
+        val languageSelected = mLanguageSpinnerAdapter.getItem(position)
+        mViewModel.setLanguageSelected(languageSelected!!)
     }
 }

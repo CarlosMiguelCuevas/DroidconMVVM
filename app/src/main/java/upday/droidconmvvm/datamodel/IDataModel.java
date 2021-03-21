@@ -4,16 +4,13 @@ import androidx.annotation.NonNull;
 
 import java.util.List;
 
-import io.reactivex.Observable;
 import upday.droidconmvvm.model.Language;
-
-import static upday.droidconmvvm.model.Language.LanguageCode;
 
 public interface IDataModel {
 
     @NonNull
-    Observable<List<Language>> getSupportedLanguages();
+    List<Language> getSupportedLanguages();
 
     @NonNull
-    Observable<String> getGreetingByLanguageCode(@NonNull final LanguageCode code);
+    String getGreetingByLanguageCode(@NonNull final Language code);
 }
