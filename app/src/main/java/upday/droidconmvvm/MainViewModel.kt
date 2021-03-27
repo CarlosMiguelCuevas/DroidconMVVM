@@ -23,7 +23,8 @@ class MainViewModel(
     }
 
     fun setLanguageSelected(language: Language) {
-        currentLanguage.value = language
+        if (currentLanguage.value != language)
+            currentLanguage.value = language
     }
 
     val supportedLanguages: List<Language> by lazy {
